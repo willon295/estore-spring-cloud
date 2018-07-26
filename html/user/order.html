@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="杰普电子商务门户">
+    <title>杰普电子商务门户</title>
+    <LINK href="../css/main.css" rel=stylesheet>
+    <script language="JavaScript" src="../js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
+    <script src="../js/sendAjax.js"></script>
+    <script src="../js/page.js"></script>
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/jquery.qrcode.min.js"></script>
+</head>
+<body id="order-list-body"
+      onLoad="MM_preloadImages('../images/index_on.gif','../images/reg_on.gif','../images/order_on.gif','../images/top/topxmas/jp_on.gif','../images/top/topxmas/download_on.gif','../images/top/topxmas/bbs_on.gif','../images/top/topxmas/designwz_on.gif')"
+      topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="table2">
+    <tr>
+        <td align="left" width="7%" background="../images/top_bg.gif"><img src="../images/logo.gif" width="165"
+                                                                           height="60"></td>
+        <td width="62%" background="../images/top_bg.gif">　</td>
+        <td width="31%" background="../images/top_bg.gif" align="right">
+            <img src="../images/top_r.gif" width="352" height="58" border="0"></td>
+    </tr>
+</table>
+
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td background="../images/dh_bg.gif" align="left" height="12">
+                <table width="100" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td width="5%">　</td>
+                        <td width="10%"><a href="../index.html" onMouseOut="MM_swapImgRestore()"
+                                           onMouseOver="MM_swapImage('Image1','','../images/index_on.gif',1)">
+                            <img name="Image1" border="0" src="../images/index.gif" width="90" height="36"></a></td>
+                        <td width="10%"><a href="../user/userinfo.html" onMouseOut="MM_swapImgRestore()"
+                                           onMouseOver="MM_swapImage('Image2','','../images/reg_on.gif',1)">
+                            <img name="Image2" border="0" src="../images/reg.gif" width="92" height="36"></a></td>
+                        <td width="10%"><a href="../shopcart.html" onMouseOut="MM_swapImgRestore()"
+                                           onMouseOver="MM_swapImage('Image4','','../images/carts_on.gif',1)">
+                            <img name="Image4" border="0" src="../images/cart.gif" width="92" height="36"></a></td>
+                        <td width="10%"><a href="../user/order.html" onMouseOut="MM_swapImgRestore()"
+                                           onMouseOver="MM_swapImage('Image5','','../images/order_on.gif',1)">
+                            <img name="Image5" border="0" src="../images/order.gif" width="92" height="36"></a></td>
+                        <td width="10%" id="show-logout" ><a href="javascript:void(0);" onclick="logout()"
+                                           onMouseOut="MM_swapImgRestore()"
+                                           onMouseOver="MM_swapImage('Image6','','../images/exit_on.gif',1)">
+                            <img name="Image6" border="0" src="../images/exit.gif" width="92" height="36"></a></td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellspacing="1" cellpadding="3" align="center" border="0" width="98%">
+        <tr>
+            <td width="65%"><BR>
+                >> 欢迎访问 <b>杰普电子商务门户</b></td>
+            <td width="35%" align="right">
+
+            </td>
+        </tr>
+    </table>
+
+
+    <!--文件体开始-->
+<div id="order-content" align="center">
+    <table cellspacing=1 cellpadding=3 align=center class=tableBorder2>
+        <tr>
+            <td height=25 valign=middle>
+                <img src="../images/Forum_nav.gif" align="middle">
+                <a href=../index.html>杰普电子商务门户</a> →
+                <img border="0" src="../images/dog.gif" width="19" height="18">
+                订单列表
+
+                <b id="order-list-inform" style="color: red; font-size: 20px;" align="center"></b>
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <!------------------订单列表------------------->
+    <div id="customer-order-list" style="height: 240px">
+
+
+    </div>
+    <div class="ui-page" id="orderListPageBar">
+
+    </div>
+</div>
+<br>
+<!----------------------------------文件尾开始-------------------------->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" height="28">
+    <tr>
+        <td height="17" background="images/bot_bg.gif">
+            　
+        </td>
+    </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td bgcolor="#f1f1f6" height="53" valign="center">
+            <p align="center">Copyright &copy;2004 - 2013
+                <a href="http://www.briup.com.cn"> <b><font face="Verdana,">briup</font>
+                    <font color=#CC0000>.com.cn</font></b><br>
+                </a>
+            </p>
+
+        </td>
+    </tr>
+</table>
+</body>
+<script>
+    if (checkLogin()) {
+
+        $("#orderListPageBar").paging({pageSize: 5, url: "/order/customer/" + JSON.parse($.cookie('customer')).id})
+    }
+
+</script>
+</html>

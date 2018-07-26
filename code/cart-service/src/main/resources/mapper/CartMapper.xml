@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.briup.estore.dao.CartDAO">
+    <resultMap id="cartResultMap" type="com.briup.estore.common.bean.Cart">
+        <id property="id" column="caid"/>
+        <result property="num" column="num"/>
+
+        <association property="book" javaType="com.briup.estore.common.bean.Book">
+            <id property="id" column="bid"/>
+            <result property="name" column="bname"/>
+            <result property="price" column="price"/>
+        </association>
+    </resultMap>
+
+    <delete id="deleteCartById" parameterType="long">
+        delete from cart
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCartByCustomerIdAndBookId" parameterType="Cart">
+
+        delete from cart
+        where bookid = #{book.id} and customerid = #{customer.id}
+
+    </delete>
+
+    <delete id="deleteAllCartsByCustomerId" parameterType="long">
+        delete from cart
+        where customerid = #{id}
+    </delete>
+
+
+    <insert id="saveCart" parameterType="Cart">
+        insert into cart (num, customerid, bookid) VALUES (#{num}, #{customer.id}, #{book.id})
+    </insert>
+
+
+    <update id="updateCart" parameterType="Cart">
+        UPDATE cart
+        set num = #{num}
+        WHERE customerid = #{customer.id} AND bookid = #{book.id}
+    </update>
+
+    <select id="getCartById" resultMap="cartResultMap">
+        select
+            ca.id  caid,
+            ca.num,
+            b.id   bid,
+            b.name bname,
+            b.price
+        from cart ca, book b, customer cu
+        where
+            cu.id = ca.customerid
+            and ca.bookid = b.id
+            and ca.id = #{id}
+    </select>
+
+    <select id="listCartsByCustomerId" resultMap="cartResultMap">
+        select
+            ca.id  caid,
+            ca.num,
+            b.id   bid,
+            b.name bname,
+            b.price
+        from cart ca, book b, customer cu
+        where
+            cu.id = ca.customerid
+            and ca.bookid = b.id
+            and cu.id = #{id}
+
+    </select>
+
+
+    <select id="getCartByCustomerIdAndBookId" resultMap="cartResultMap">
+        select *
+        from cart
+        where
+            customerid = #{customer.id}
+            and bookid = #{book.id}
+    </select>
+
+    <select id="listAllCartsByCustomerId" resultMap="cartResultMap">
+
+        select
+            ca.id      caid,
+            customerid cuid,
+            bookid     bid,
+            num,
+            b.name     bname,
+            b.price,
+            cu.name    cname
+        from cart ca, customer cu, book b
+
+        where
+            cu.id = ca.customerid
+            and b.id = ca.bookid
+            and cu.id= #{id}
+    </select>
+</mapper>

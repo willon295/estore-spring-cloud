@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.briup.estore.dao.CustomerDAO">
+    <resultMap id="customerResultMap" type="Customer">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="zip" column="zip"/>
+        <result property="address" column="address"/>
+        <result property="telephone" column="telephone"/>
+        <result property="email" column="email"/>
+        <collection property="orders" ofType="Order">
+            <result property="cost" column="cost"/>
+            <result property="orderDate" column="orderdate"/>
+        </collection>
+    </resultMap>
+    <insert id="saveCustomer" parameterType="Customer">
+        insert into customer (name, password, zip, address, telephone, email)
+        values (#{name}, #{password}, #{zip}, #{address}, #{telephone}, #{email})
+    </insert>
+
+    <select id="findByName" parameterType="string" resultType="Customer">
+        select *
+        from customer
+        where name = #{name}
+    </select>
+
+    <insert id="updateCustomer" parameterType="Customer">
+        update customer
+        set name  = #{name}, password = #{password}, zip = #{zip}, address = #{address}, telephone = #{telephone},
+            email = #{email}
+        where id = #{id}
+    </insert>
+    <select id="findById" resultType="Customer">
+
+        select *
+        from customer
+        where id = #{id}
+    </select>
+</mapper>

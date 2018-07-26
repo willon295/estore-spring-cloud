@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.briup.estore.dao.LineDAO">
+
+    <resultMap id="lineResultMap" type="Line">
+        <id property="id" column="lid"/>
+        <result property="num" column="num"/>
+        <association property="order" javaType="Order">
+            <id property="id" column="oid"/>
+            <result property="payway" column="payway" typeHandler="com.briup.estore.common.enums.typehandler.PaywayEnumHandler"/>
+            <result property="cost" column="cost"/>
+            <result property="orderDate" column="orderDate"/>
+        </association>
+        <association property="book" javaType="Book">
+            <id property="id" column="bid"/>
+            <result property="name" column="name"/>
+            <result property="price" column="price"/>
+        </association>
+    </resultMap>
+
+    <select id="listLines" resultType="Line">
+        select *
+        from orderline
+    </select>
+
+    <!--可以查出， 订单id，书本名称, 书本价格-->
+    <select id="getLineById" resultMap="lineResultMap">
+        select
+            l.id as lid,
+            l.num,
+            l.orderid,
+            b.id as bid,
+            b.name,
+            b.price,
+            o.id as oid,
+            o.cost,
+            o.orderDate
+        from orderline l, book b, orderform o
+        where
+            b.id = l.bookid
+            and o.id = l.orderid
+            and l.id = #{id}
+    </select>
+    <insert id="saveLine" parameterType="Line">
+        insert into orderline (num, orderid, bookid) VALUES (#{num}, #{order.id}, #{book.id})
+    </insert>
+
+
+    <select id="listLinesByOrderId" resultMap="lineResultMap" parameterType="long">
+SELECT
+
+l.id lid, l.num,
+b.id  bid ,b.name, b.price,
+o.id oid ,o.cost,o.state,o.payway
+
+FROM orderline l , orderform o , book b
+
+WHERE
+l.orderid = o.id
+and  l.bookid = b.id
+and o.id = #{id}
+
+    </select>
+</mapper>

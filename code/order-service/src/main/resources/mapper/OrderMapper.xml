@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.briup.estore.dao.OrderDAO">
+
+    <!--订单明细map-->
+    <resultMap id="lineResultMap" type="Line">
+        <id property="id" column="lid"/>
+        <result property="num" column="num"/>
+        <association property="book" javaType="Book">
+            <id property="id" column="bid"/>
+            <result property="name" column="bname"/>
+            <result property="price" column="price"/>
+        </association>
+    </resultMap>
+
+    <!--通过客户查询的订单信息-->
+    <resultMap id="orderResultWithCustomer" type="Order">
+        <id property="id" column="oid"/>
+        <result property="cost" column="cost"/>
+        <result property="state" column="state"/>
+        <result property="payway" column="payway"
+                typeHandler="com.briup.estore.common.enums.typehandler.PaywayEnumHandler"/>
+        <result property="orderDate" column="orderDate"/>
+        <association property="customer" javaType="Customer">
+            <id property="id" column="cid"/>
+            <result property="name" column="cname"/>
+            <result property="zip" column="zip"/>
+            <result property="address" column="address"/>
+            <result property="telephone" column="telephone"/>
+            <result property="email" column="email"/>
+        </association>
+        <collection property="lines" ofType="Line" resultMap="lineResultMap" column="lid"/>
+    </resultMap>
+
+
+    <!--通过 订单id 查询的结果-->
+    <resultMap id="orderResultMap" type="Order">
+        <id property="id" column="oid"/>
+        <result property="payway" column="payway"
+                typeHandler="com.briup.estore.common.enums.typehandler.PaywayEnumHandler"/>
+        <result property="cost" column="cost"/>
+        <result property="orderDate" column="orderDate"/>
+        <collection property="lines" ofType="Line" resultMap="lineResultMap" column="lid"/>
+    </resultMap>
+
+    <insert id="saveOrder" parameterType="Order">
+        insert into orderform (cost, orderDate, customerid)
+        values (#{cost}, #{orderDate}, #{customer.id})
+    </insert>
+
+
+    <insert id="saveOrderAndReturnOrderWithNewId" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+
+        insert into orderform (cost, orderDate, customerid)
+        values (#{cost}, #{orderDate}, #{customer.id})
+    </insert>
+
+    <!--查出订单 ,总开销 ，日期，  条目id ，书本名称，  数量 , 书本价格 -->
+    <select id="getOrderById" resultMap="orderResultMap">
+        select
+            o.id   as oid,
+            o.cost,
+            o.orderDate,
+            o.payway,
+            l.id   as lid,
+            l.num,
+            b.id   as bid,
+            b.name as bname,
+            b.price
+
+        from orderform o, orderline l, book b
+        where
+            l.orderid = o.id
+            and l.bookid = b.id
+            and o.id = #{id}
+    </select>
+
+
+    <!--根据 用户id 查询 用户的订单-->
+    <select id="listOrdersByCustomerId" resultMap="orderResultWithCustomer">
+    select  id  oid,cost,state,payway
+      from orderform
+     where customerid=#{id}
+    </select>
+
+
+    <delete id="deleteOrderById">
+        delete from orderform
+        where id = #{id}
+    </delete>
+
+
+    <!--更改订单状态-->
+    <update id="changeOrderStateAndPayway" parameterType="Order">
+
+        update orderform
+        set  state = #{state}, payway=#{payway,typeHandler=com.briup.estore.common.enums.typehandler.PaywayEnumHandler}
+        where  id = #{id}
+    </update>
+</mapper>
