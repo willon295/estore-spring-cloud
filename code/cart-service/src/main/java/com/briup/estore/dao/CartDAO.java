@@ -29,9 +29,9 @@ public interface CartDAO {
     void deleteCartByCustomerIdAndBookId(Cart cart) throws Exception;
 
     /**
-     * 通过
+     * 根据用户id 删除所有购物车信息
      *
-     * @param id 根据用户id 删除所有购物车信息
+     * @param id 用户id
      * @throws Exception 异常
      */
     void deleteAllCartsByCustomerId(long id) throws Exception;
