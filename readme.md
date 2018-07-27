@@ -130,10 +130,10 @@
 
     
 
-3. 添加数据，发送数据格式如下
+3. 前台请求数据格式，服务器响应数据格式 如下
 
    ```json
-   //发送数据如下
+   //发送数据
    {
    
      "id": 5,
@@ -146,7 +146,7 @@
      }
    
    }
-   //接收用户的购物车信息如下
+   //接收用户的购物车信息（分页信息）
    {
        "msg":"OK",
        "data":{
@@ -295,6 +295,10 @@ server{
 
 
 
+## 修改支付宝配置信息
+
+`order-service`  项目中 `application-cluster.yml` 的  `alipay`  所有字段。
+
 
 
 ## 启动项目
@@ -305,7 +309,8 @@ server{
    #!/bin/bash
    
    source /etc/profile
-   java -jar /root/springApps/*.jar  --spring.profiles.active=cluster
+   #指定spring-boot 运行时配置文件为  cluster
+   java -jar /root/estore/*.jar  --spring.profiles.active=cluster
    ```
 
 2. 在每一台机器中执行,让程序不占用终端后台运行
@@ -399,14 +404,15 @@ server{
                  index  index.html;
          }   
      
-         location  /customer {
-             proxy_pass http://node3/customer;
-         }   
+     
          location  /book {
              proxy_pass http://node1/book;
          }   
          location  /cart {
              proxy_pass http://node2/cart;
+         }   
+         location  /customer {
+             proxy_pass http://node3/customer;
          }   
          location  /order {
              proxy_pass http://node4/order;
@@ -423,13 +429,15 @@ server{
 
 1. 每一个模块的 `application.yml` 
 
-```yaml
-  datasource:
-    url: jdbc:mysql://localhost:3306/estore?useSSL=false&useUnicode=true&characterEncoding=utf-8
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
-```
+   ```
+     datasource:
+       url: jdbc:mysql://localhost:3306/estore?useSSL=false&useUnicode=true&characterEncoding=utf-8
+       driver-class-name: com.mysql.jdbc.Driver
+       username: root
+       password: root
+   ```
+
+   
 
 
 
