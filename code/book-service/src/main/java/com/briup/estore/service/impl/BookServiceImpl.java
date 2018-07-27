@@ -31,6 +31,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public PageInfo<Book> listBooks(int currentPage) throws BookException {
+
         PageHelper.startPage(currentPage, 5);
         List<Book> books = bookDAO.listBooks();
         return new PageInfo<>(books);

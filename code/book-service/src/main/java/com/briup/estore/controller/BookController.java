@@ -39,14 +39,17 @@ public class BookController {
         PageInfo page = null;
         try {
             page = bookService.listBooks(currentPage);
+            //如果查询的分页信息为空，直接返回
+            if (page == null) {
+                response.setMsg(MSG_FAILED);
+                return response;
+            }
         } catch (BookException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
-        if (page == null) {
-            response.setMsg(MSG_FAILED);
-        } else {
-            response.setMsg(MSG_OK);
-        }
+
+        response.setMsg(MSG_OK);
         response.setData(page);
         return response;
     }
@@ -62,18 +65,20 @@ public class BookController {
     public ResponseDTO getBookById(@PathVariable("id") long id) {
 
         ResponseDTO response = new ResponseDTO();
-        Book book = null;
+        Book book;
         try {
             book = bookService.getBookById(id);
-            response.setMsg(MSG_OK);
+            if (book == null) {
+                response.setMsg(MSG_FAILED);
+                return response;
+            }
+
         } catch (BookException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
 
-        if (book == null) {
-            response.setMsg(MSG_FAILED);
-        }
-
+        response.setMsg(MSG_OK);
         response.setData(book);
         return response;
     }
@@ -87,13 +92,14 @@ public class BookController {
      */
     @GetMapping("/book/search")
     public ResponseDTO listBooksConditionally(BookQueryParamDTO params) {
-        ResponseDTO response = new ResponseDTO();
 
-        List<Book> books = null;
+        ResponseDTO response = new ResponseDTO();
+        List<Book> books;
         try {
             books = bookService.listBooksConditionally(params);
         } catch (BookException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         response.setData(books);
         response.setMsg(MSG_OK);

@@ -8,6 +8,9 @@ import com.briup.estore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author willon
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -22,11 +25,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer login(String name, String password) throws CustomerException {
         Customer byName = customerDao.findByName(name);
+
+        //判断登陆用户名，密码是否匹配，是则返回完整用户信息，否则返回null
         if (byName != null && password.equals(byName.getPassword())) {
             return byName;
-        } else {
-            return null;
         }
+        return null;
+
     }
 
     @Override

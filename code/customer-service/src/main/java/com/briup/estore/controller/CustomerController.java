@@ -33,9 +33,9 @@ public class CustomerController {
      */
     @PostMapping("/customer")
     public ResponseDTO register(@RequestBody Customer customer) {
-        ResponseDTO response = new ResponseDTO();
 
-        //注册之前判断用户信息是否合法
+        ResponseDTO response = new ResponseDTO();
+        //判断注册信息是否合法，不合法返回失败
         if (customer.getName() == null
                 || "".equals(customer.getName())
                 || customer.getPassword() == null
@@ -58,6 +58,7 @@ public class CustomerController {
             response.setMsg(MSG_OK);
         } catch (CustomerException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -75,6 +76,7 @@ public class CustomerController {
         Customer loginUser;
         try {
             loginUser = customerService.login(customer.getName(), customer.getPassword());
+            //未查询到此用户，直接返回失败
             if (loginUser == null) {
                 response.setMsg(MSG_FAILED);
                 return response;
@@ -83,6 +85,7 @@ public class CustomerController {
             response.setData(loginUser);
         } catch (CustomerException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -100,6 +103,7 @@ public class CustomerController {
         Customer byId;
         try {
             byId = customerService.findById(id);
+            //不存在此用户，直接返回失败
             if (byId == null) {
                 response.setMsg(MSG_FAILED);
                 return response;
@@ -108,6 +112,7 @@ public class CustomerController {
             response.setData(byId);
         } catch (CustomerException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
 
         return response;
@@ -122,12 +127,14 @@ public class CustomerController {
      */
     @PutMapping("/customer")
     public ResponseDTO updateCustomer(@RequestBody Customer customer) {
+
         ResponseDTO response = new ResponseDTO();
         try {
             customerService.updateCustomer(customer);
             response.setMsg(MSG_OK);
         } catch (CustomerException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
 
@@ -142,8 +149,8 @@ public class CustomerController {
      */
     @GetMapping("/customer/isValid/{name}")
     public ResponseDTO isRegNameValid(@PathVariable("name") String name) {
-        ResponseDTO response = new ResponseDTO();
 
+        ResponseDTO response = new ResponseDTO();
         Customer byname;
         try {
             byname = customerService.findByName(name);
@@ -155,8 +162,8 @@ public class CustomerController {
             response.setMsg(MSG_FAILED);
         } catch (CustomerException e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
-
         return response;
 
     }

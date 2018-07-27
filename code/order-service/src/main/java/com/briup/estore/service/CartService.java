@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 购物车Service
+ * 调用 购物车Service
  *
  * @author willon
  */
@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 @FeignClient(value = "CART-SERVICE")
 public interface CartService {
+
     /**
-     * 通过
+     * 根据用户id 删除所有购物车信息
      *
-     * @param id 根据用户id 删除所有购物车信息
+     * @param id 用户id
      * @throws Exception 异常
      */
     @DeleteMapping("/cart/customer/{id}")

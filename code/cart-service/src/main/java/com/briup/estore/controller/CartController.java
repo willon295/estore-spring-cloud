@@ -39,8 +39,8 @@ public class CartController {
             service.saveCart(cart);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
-            log.error("添加购物车失败" + e.getMessage());
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -60,6 +60,7 @@ public class CartController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -79,7 +80,8 @@ public class CartController {
             service.updateCart(cart);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
-            response.setMsg(MSG_OK);
+            response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -100,6 +102,7 @@ public class CartController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -126,16 +129,23 @@ public class CartController {
         return response;
     }
 
+    /**
+     * 通过用户 id，  查询 非分页 的所有购物车信息，
+     *
+     * @param id 客户id
+     * @return 所有购物车信息
+     */
     @GetMapping(value = "/cart/customer/{id}", params = "page=0")
     public ResponseDTO listCartsByCustomerId(@PathVariable("id") long id) {
-        ResponseDTO response = new ResponseDTO();
 
+        ResponseDTO response = new ResponseDTO();
         try {
             List<Cart> carts = service.listAllCartsByCustomerId(id);
             response.setData(carts);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }

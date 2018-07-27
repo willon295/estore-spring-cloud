@@ -66,10 +66,6 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderDate(new Date());
         //添加订单
         orderDAO.saveOrderAndReturnOrderWithNewId(order);
-        Long newOrderId = order.getId();
-        log.info("生成新的订单id： " + newOrderId);
-        //添加订单明细
-
         order.setState("NO");
         List<Line> lines = order.getLines();
         for (Line line : lines) {
@@ -92,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public PageInfo<Order> listOrdersByCustomerId(long id, int page) throws Exception {
 
+        //默认展示5 条数据
         PageHelper.startPage(page, 5);
         List<Order> orders = orderDAO.listOrdersByCustomerId(id);
         return new PageInfo<>(orders);
@@ -99,42 +96,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public PageInfo<Line> getLinesByOrderId(long id, int page) throws Exception {
-
+        //默认展示5 条数据
         PageHelper.startPage(page, 5);
         List<Line> lines = lineDAO.listLinesByOrderId(id);
         return new PageInfo<>(lines);
 
     }
 
-
-    @Override
-    public String getTradeQrCode(long id) throws Exception {
-
-        Order orderById = orderDAO.getOrderById(id);
-        AlipayTradePrecreateModel precreateModel = new AlipayTradePrecreateModel();
-        precreateModel.setOutTradeNo(String.valueOf(id));
-        precreateModel.setSubject("用户" + id + "购书订单");
-        precreateModel.setTimeoutExpress(TIME_OUT);
-        precreateModel.setTotalAmount(String.valueOf(orderById.getCost()));
-        precreateModel.setStoreId(STORE_ID);
-
-        AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
-
-        log.warn(request.toString());
-        log.info("请求的数据： " + precreateModel.toString());
-        request.setBizModel(precreateModel);
-
-
-        request.setNotifyUrl("http://willon.cn:9999/alipay/notify");
-        AlipayTradePrecreateResponse response = alipayClient.execute(request);
-        log.info("返回信息： " + response.getBody());
-        log.info("预创建订单成功 , 正在生成二维码....");
-        String qrCode = response.getQrCode();
-        log.info("获取到的二维码： " + qrCode);
-
-        return qrCode;
-
-    }
 
     /**
      * 改变订单状态
@@ -162,7 +130,6 @@ public class OrderServiceImpl implements OrderService {
 
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
 
-
         request.setBizContent("{\"out_trade_no\":\"" + id + "\","
                 + "\"total_amount\":\"" + orderById.getCost() + "\","
                 + "\"subject\":\"用户" + id + "购书订单\","
@@ -174,6 +141,43 @@ public class OrderServiceImpl implements OrderService {
         request.setReturnUrl(notifyUrl + "/" + id + "?callback=alipay");
         return alipayClient.pageExecute(request).getBody();
 
+
+    }
+
+
+    /**
+     * 此方法 适用于  手动绘制二维码，手动处理 支付宝异步通知
+     *
+     * @param id 订单id
+     * @return 二维码
+     * @throws Exception 异常
+     */
+    @Deprecated
+    @Override
+    public String getTradeQrCode(long id) throws Exception {
+
+        Order orderById = orderDAO.getOrderById(id);
+        AlipayTradePrecreateModel precreateModel = new AlipayTradePrecreateModel();
+        precreateModel.setOutTradeNo(String.valueOf(id));
+        precreateModel.setSubject("用户" + id + "购书订单");
+        precreateModel.setTimeoutExpress(TIME_OUT);
+        precreateModel.setTotalAmount(String.valueOf(orderById.getCost()));
+        precreateModel.setStoreId(STORE_ID);
+
+        AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
+
+        log.warn(request.toString());
+        log.info("请求的数据： " + precreateModel.toString());
+        request.setBizModel(precreateModel);
+
+        request.setNotifyUrl("http://willon.cn:9999/alipay/notify");
+        AlipayTradePrecreateResponse response = alipayClient.execute(request);
+        log.info("返回信息： " + response.getBody());
+        log.info("预创建订单成功 , 正在生成二维码....");
+        String qrCode = response.getQrCode();
+        log.info("获取到的二维码： " + qrCode);
+
+        return qrCode;
 
     }
 

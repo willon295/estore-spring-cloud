@@ -26,7 +26,6 @@ public class OrderController {
     private static final String MSG_OK = "OK";
     private static final String MSG_FAILED = "FAILED";
 
-
     @Value(value = "${alipay.return-url}")
     public String returnUrl;
 
@@ -51,6 +50,7 @@ public class OrderController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -72,6 +72,7 @@ public class OrderController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
 
         return response;
@@ -96,6 +97,7 @@ public class OrderController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
 
         return response;
@@ -108,11 +110,12 @@ public class OrderController {
      *
      * @param id   用户id
      * @param page 当前页
-     * @return 处理结果
+     * @return 包含分页信息的订单信息
      */
 
     @GetMapping(value = "/order/customer/{id}", params = "pageSize=5")
     public ResponseDTO listOrdersByCustomerId(@PathVariable("id") long id, int page) {
+
         ResponseDTO response = new ResponseDTO();
         try {
             PageInfo<Order> orderPageInfo = orderService.listOrdersByCustomerId(id, page);
@@ -120,6 +123,7 @@ public class OrderController {
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
+            return response;
         }
         return response;
     }
@@ -137,6 +141,7 @@ public class OrderController {
         String tradeForm;
         try {
             tradeForm = orderService.getTradePage(id);
+            //直接响应数据
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write(tradeForm);
             response.getWriter().flush();
@@ -158,6 +163,7 @@ public class OrderController {
      */
     @GetMapping(value = "/order/{id}", params = "callback=alipay")
     public void changeOrderStateAndPayway(@PathVariable("id") long id, HttpServletResponse httpServletResponse) {
+
         Order order = new Order();
         order.setId(id);
         order.setState("payed");
@@ -168,7 +174,6 @@ public class OrderController {
         } catch (Exception e) {
             log.error("回调失败： " + returnUrl + "_" + e.getMessage());
         }
-
 
     }
 }

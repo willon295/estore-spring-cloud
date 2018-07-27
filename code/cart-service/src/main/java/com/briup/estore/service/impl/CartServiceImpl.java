@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
         if (existCart == null) {
             cartDAO.saveCart(cart);
         } else {
-            //存在 更新信息
+            //存在, 更新信息
             existCart.setCustomer(cart.getCustomer());
             existCart.setBook(cart.getBook());
             int newCount = existCart.getNum() + 1;
