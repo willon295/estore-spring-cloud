@@ -12,24 +12,24 @@
 
 # 实现功能
 
-1.  注册信息 `实时检测注册` ，`用户信息管理` ， `自动登陆 ` ， `登陆验证 ` 
+1.   **注册信息 `实时检测注册` ，`用户信息管理` ， `自动登陆 ` ， `登陆验证 `** 
 ![namenotvalid]( /images/namenotvalid.png)
 ![namevalid]( /images/namevalid.png)
 ![checkpwd]( /images/checkpwd.png)
 ![userinfo]( /images/userinfo.png)
 
 
-2. JQery + Ajax 异步分页，书本信息展示
+2. **JQery + Ajax 异步分页，书本信息展示** 
       ![index]( /images/index.png)
-3. 关键字、价格动态搜索
+3. **关键字、价格动态搜索** 
    ![search]( /images/search.png)
-4. 书本详情展示、购物车(异步修改数据)，自动重新统计
+4. **书本详情展示、购物车(异步修改数据)，自动重新统计** 
    ![cart]( /images/cart.png)
-5. 订单
+5. **订单** 
 
    ![orderlist]( /images/orderlist.png)
 
-6. 支付宝扫玛支付
+6. **支付宝扫玛支付** 
 
    ![alipay]( /images/alipay.png)
 
@@ -43,17 +43,17 @@
 
    ```json
       {
-          msg: "OK",
-          data:  {
-          id: 6,
-          name: "Java 2核心技术（第6版） 卷I：基础知识",
-          price: 75,
-          author: "叶乃文",
-          publisher: "机械工业出版社/Prentice Hall PTR",
-          pageNum: "691",
-          desc: "本书是java技术经典参考书，多年畅销不衰，第7版在保留以前版本风格的基础上，涵盖java 2开发平台标准版j2se 5．0的基础知识，主要内容包括面向对象程序设计、反射与代理、接口与内部类、事件监听器模型、使用swing ui工具箱进行图形用户界面设计、异常处理、流输入/输出和对象序列化，泛型程序设计等。. ",
-          img: null,
-          type: "Java程序设计"
+          "msg": "OK",
+          "data":  {
+          		"id": 6,
+          		"name": "Java 2核心技术（第6版） 卷I：基础知识",
+          		"price": 75,
+          		"author" : "叶乃文",
+          		"publisher": "机械工业出版社/Prentice Hall PTR",
+          		"pageNum": "691",
+          		"desc": "本书是java技术经典参考书，多年畅销不衰，第7版在保留以前版本风格的基础上，涵盖java 2开发平台标准版j2se 5．0的基础知识，主要内容包括面向对象程序设计、反射与代理、接口与内部类、事件监听器模型、使用swing ui工具箱进行图形用户界面设计、异常处理、流输入/输出和对象序列化，泛型程序设计等。. ",
+          "img": null,
+          "type": "Java程序设计"
           }
       }
    ```
