@@ -1,22 +1,27 @@
 package com.briup.estore.common.enums;
 
 
+/**
+ * 订单支付方式枚举类
+ *
+ * @author willon
+ */
 public enum PaywayEnum {
 
     /**
-     * 货到付款
+     * 现金
      */
-    HDFK(0, "货到付款"),
+    CASH(0, "现金"),
 
     /**
-     * 邮局汇款
+     * 支付宝
      */
-    YJHK(1, "邮局汇款"),
+    ALIPAY(1, "支付宝"),
 
     /**
-     * 银行转账
+     * 微信
      */
-    YHZZ(2, "银行转账");
+    WECHAT(2, "微信");
     int code;
     String desc;
 
