@@ -3,7 +3,7 @@ package com.briup.estore.common.dto;
 import lombok.Data;
 
 /**
- * 响应数据的 统一类
+ * 统一 响应数据类
  *
  * @author willon
  */
