@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author willon
+ */
 @Slf4j
 @RestController
 public class CustomerController {
@@ -85,7 +88,7 @@ public class CustomerController {
     }
 
     /**
-     * 通过用户id查询用户信息
+     * 对其他服务 提供的接口，通过用户id查询用户信息
      *
      * @param id 用户id
      * @return 响应信息
