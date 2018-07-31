@@ -44,14 +44,12 @@ function MM_swapImage() { //v3.0
 
 function checkReg() {
     var temp;
-    temp = new String(document.reg.password.value);
-    if (document.reg.id.value == "") {
-
+    temp = String(document.reg.password.value);
+    if (document.reg.id.value === "") {
         return false;
     }
-    if (document.reg.password.value == "") {
+    if (document.reg.password.value === "") {
         $("#reg-inform-password").text("请输入密码...").css("color", "red");
-
         return false;
     } else if (temp.length < 6 || temp.length > 8) {
         $("#reg-inform-password").text("您的密码少于6位或多于8位...").css("color", "red");
@@ -60,58 +58,27 @@ function checkReg() {
     } else {
         $("#reg-inform-password").text("OK").css("color", "green");
     }
-    if (document.reg.password2.value == "") {
+    if (document.reg.password2.value === "") {
         $("#reg-inform-password2").text("请再次输入密码...").css("color", "red");
         return false;
-    } else if (document.reg.password.value != document.reg.password2.value) {
+    } else if (document.reg.password.value !== document.reg.password2.value) {
         $("#reg-inform-password2").text("两次密码不一致...").css("color", "red");
         document.reg.password2.value = "";
         return false;
     } else {
         $("#reg-inform-password2").text("OK").css("color", "green");
     }
-    if (document.reg.email.value != "" & IsEmail(document.reg.email.value)) {
-        alert("您的E-mail不符合规范!");
-        document.reg.email.focus();
+
+    if (document.reg.city.value === "") {
+        return false;
+    }
+    if (document.reg.street === "") {
         return false;
     }
     return true;
 
 }
 
-function IsEmail(item) {
-    var etext;
-    var elen;
-    var i;
-    var aa;
-    var uyear, umonth, uday;
-    etext = item;
-    elen = etext.length;
-    if (elen < 5)
-        return true;
-    i = etext.indexOf("@", 0)
-    if (i == 0 || i == -1 || i == elen - 1)
-        return true;
-    else {
-        if (etext.indexOf("@", i + 1) != -1)
-            return true;
-    }
-    if (etext.indexOf("..", i + 1) != -1)
-        return true;
-    i = etext.indexOf(".", 0)
-    if (i == 0 || i == -1 || etext.charAt(elen - 1) == '.')
-        return true;
-    if (etext.charAt(0) == '-' || etext.charAt(elen - 1) == '-')
-        return true;
-    if (etext.charAt(0) == '_' || etext.charAt(elen - 1) == '_')
-        return true;
-    for (i = 0; i <= elen - 1; i++) {
-        aa = etext.charAt(i)
-        if (!((aa == '.') || (aa == '@') || (aa == '-') || (aa == '_') || (aa >= '0' && aa <= '9') || (aa >= 'a' && aa <= 'z') || (aa >= 'A' && aa <= 'Z')))
-            return true;
-    }
-    return false;
-}
 
 /**
  * 判断注册名称 是否可用
@@ -233,19 +200,14 @@ function updateCustomer() {
                 if (res.msg === "OK") {
                     //更新cookie信息
                     $.cookie('customer', JSON.stringify(updateData), {path: '/', expires: 1});
-                    $("#update-password").val(password);
-                    $("#update-password2").val(password);
-                    $("#update-address").val(address);
-                    $("#update-zip").val(zip);
-                    $("#update-telephone").val(telephone);
-                    $("#update-email").val(email);
+                    $('<div>').appendTo('body').addClass('alert alert-success').html('^__^ 修改成功').show().delay(2000).fadeOut();
 
                 } else {
-                    $("#update-inform").text("更新失败").fadeIn().fadeOut()
+                    $('<div>').appendTo('body').addClass('alert alert-danger').html('服务器不可用').show().delay(2000).fadeOut();
                 }
             },
             error: function () {
-                $("#update-inform").text("更新失败").fadeIn().fadeOut()
+                $('<div>').appendTo('body').addClass('alert alert-danger').html('服务器不可用').show().delay(2000).fadeOut();
             }
 
         })
@@ -290,7 +252,7 @@ function login() {
             }
         },
         error: function () {
-            alert("服务器不可用")
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('服务器不可用').show().delay(500).fadeOut();
         }
     })
 
@@ -339,7 +301,8 @@ function updateCart(cartMessage) {
             }
         },
         error: function () {
-            $("#cart-inform").text("更新失败").fadeIn().fadeOut()
+
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('更新失败').show().delay(500).fadeOut();
         }
     })
 
@@ -362,11 +325,10 @@ function deleteCart(cartId) {
             if (res.msg === "OK") {
                 $("#mybody").load("#cart-list-table");
             } else {
-
-                $("#cart-inform").text("删除失败。。").fadeIn().fadeOut();
+                $('<div>').appendTo('body').addClass('alert alert-danger').html('服务不可用').show().delay(1000).fadeOut();
             }
         }, error: function () {
-            $("#cart-inform").text("删除失败。。").fadeIn().fadeOut();
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('服务不可用').show().delay(1000).fadeOut();
         }
 
     })
@@ -387,12 +349,13 @@ function clearCart() {
         success: function (res) {
             if (res.msg === "OK") {
                 //重新加载 table
+                $('<div>').appendTo('body').addClass('alert alert-success').html('更新成功').show().delay(500).fadeOut();
                 $("#mybody").load("#cart-list-table");
 
             }
         },
         error: function () {
-            $("#cart-inform").text("更新失败。。").fadeIn().fadeOut();
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('更新失败').show().delay(500).fadeOut();
         }
 
 
@@ -427,13 +390,13 @@ function add2Cart(bookid) {
         dataType: "JSON",
         success: function (res) {
             if (res.msg === "OK") {
-                $("#index-inform").css("size","50px").text("添加成功").fadeIn().fadeOut();
+                $('<div>').appendTo('body').addClass('alert alert-success').html('^_^ 添加成功').show().delay(2000).fadeOut();
             } else {
-                $("#index-inform").text("添加失败").fadeIn().fadeOut();
+                $('<div>').appendTo('body').addClass('alert alert-danger').html('× 服务不可用').show().delay(2000).fadeOut();
             }
         },
         error: function () {
-            $("#index-inform").text("添加失败").fadeIn().fadeOut();
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('× 服务不可用').show().delay(500).fadeOut();
         }
 
     });
@@ -452,12 +415,11 @@ function deleteOrder(orderid) {
 
             if (res.msg === "OK") {
                 $("#order-list-body").load("#order-list");
-                $("#order-list-inform").text("删除成功").fadeIn().fadeOut();
+                $('<div>').appendTo('body').addClass('alert alert-success').html('删除成功').show().delay(2000).fadeOut();
             }
         },
         error: function () {
-
-            $("#order-list-inform").text("删除失败").fadeIn().fadeOut();
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('删除失败').show().delay(2000).fadeOut();
         }
 
     })
@@ -488,8 +450,11 @@ function checkLogin() {
  */
 function logout() {
     $.removeCookie('customer', {path: "/"});
-    alert("退出成功。。");
-    $(window).attr('location', '/index.html')
+    $('<div>').appendTo('body').addClass('alert alert-success').html('退出成功').show().delay(1500).fadeOut();
+
+    setTimeout(function () {
+        $(window).attr('location', '/index.html')
+    }, 1500)
 
 }
 
@@ -501,7 +466,6 @@ function logout() {
 function drawQrCodeImgByOrderId(orderid) {
 
     $.ajax({
-
         url: '/order/' + orderid + '/qrcode',
         type: "POST",
         success: function (res) {
@@ -537,6 +501,11 @@ function searchBook() {
         console.log("toprice");
         params.toPrice = $("#toPrice").val();
     }
+    if (JSON.stringify(params) === "{}") {
+        $('<div>').appendTo('body').addClass('alert alert-success').html(' 请输入查询条件').show().delay(2000).fadeOut();
+        return;
+    }
+    console.log(params);
     $.ajax({
         url: '/book/search',
         type: "GET",
@@ -544,14 +513,72 @@ function searchBook() {
         success: function (res) {
             //返回分页书本的数据
             if (res.msg === "OK") {
+                if (res.data.length === 0) {
+                    $('<div>').appendTo('body').addClass('alert alert-danger').html('无符合条件的商品 ！ ').show().delay(2000).fadeOut();
+                    return;
+                }
                 viewBookList(res.data);
                 $("#ui-page").hide();
             }
         }, error: function () {
-            $("#index-inform").text("查询失败。。").fadeIn().fadeOut();
+            $('<div>').appendTo('body').addClass('alert alert-danger').html('服务不可用').show().delay(2000).fadeOut();
         }
     })
 
 }
 
-// 客户端查询订单状态
+
+function verifyemail(str) {
+    var reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    if (reg.test(str)) {
+        $("#reg-inform-email").text("OK").css("color", "green");
+        return true;
+    } else {
+        $("#reg-inform-email").text("E-mail格式不合法").css("color", "red");
+        document.reg.email.value = "";
+        return false;
+    }
+}
+
+function verifyPost(str) {
+    var reg = /^[1-9][0-9]{5}$/;
+    if (reg.test(str)) {
+        $("#reg-inform-zip").text("OK").css("color", "green");
+        return true;
+    } else {
+        $("#reg-inform-zip").text("邮编格式错误").css("color", "red");
+        document.reg.zip.value = "";
+        return false;
+    }
+}
+
+function verifyPhone(str) {
+    var reg = /^(\+86)|(86)?1[3,5,8]{1}[0-9]{1}[0-9]{8}$/;
+    //  var reg = /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+    if (reg.test(str)) {
+        $("#reg-inform-telephone").text("OK").css("color", "green");
+        return ture;
+    } else {
+        $("#reg-inform-telephone").text("手机号不合法").css("color", "red");
+        document.reg.telephone.value = "";
+        return false;
+    }
+}
+
+function verifyCity(str) {
+    if (str === "" || null == str) {
+        $("#reg-inform-city").text("不可为空").css("color", "red");
+        return false;
+    }
+    $("#reg-inform-city").text("OK").css("color", "green");
+    return true;
+}
+
+function verifyStreet(str) {
+    if (str === "" || null == str) {
+        $("#reg-inform-street").text("地址不可为空").css("color", "red");
+        return false;
+    }
+    $("#reg-inform-street").text("OK").css("color", "green");
+    return true;
+}

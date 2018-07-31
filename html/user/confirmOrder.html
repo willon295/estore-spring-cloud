@@ -184,11 +184,11 @@
                                     $(window).attr('location', 'order.html');
                                 }, 1000)
                             } else {
-                                $("#confirm-inform").text("提交失败").fadeIn().fadeOut()
+                                $('<div>').appendTo('body').addClass('alert alert-danger').html('× 服务不可用').show().delay(2000).fadeOut();
                             }
                         },
                         error: function () {
-                            $("#confirm-inform").text("提交失败").fadeIn().fadeOut()
+                            $('<div>').appendTo('body').addClass('alert alert-danger').html('× 服务不可用').show().delay(2000).fadeOut();
                         }
 
                     })

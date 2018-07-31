@@ -162,30 +162,34 @@
 
                     <option value="其它">其它</option>
                 </select>省
-                <input type="text" size="8" name="city"
+                <input type="text" size="8" name="city" onblur="verifyCity(this.value)"
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">市/县
+                <b id="reg-inform-city"></b>
             </td>
         </tr>
         <tr>
             <td class="tablebody1"><b>联系地址</b>：</td>
             <td class="tablebody1">
-                <input type="text" size="64" maxlength="32" name="street"
+                <input type="text" size="64" maxlength="32" name="street" onblur="verifyStreet(this.value)"
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">
+                <b id="reg-inform-street"></b>
             </td>
         </tr>
 
         <tr>
             <td class="tablebody1"><b>邮编</b>：</td>
             <td class="tablebody1">
-                <input type="text" size="32" maxlength="6" name="zip"
+                <input type="number" maxlength="6" name="zip" onblur="verifyPost(this.value)"
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">
+                <b id="reg-inform-zip"></b>
             </td>
         </tr>
         <tr>
             <td class="tablebody1"><b>手机</b>：</td>
             <td class="tablebody1">
-                <input type="number" size="32" maxlength="11" name="telephone"
+                <input type="number" size="32" maxlength="11" name="telephone" onblur="verifyPhone(this.value)"
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">
+                <b id="reg-inform-telephone"></b>
             </td>
         </tr>
         <tr>
@@ -193,8 +197,10 @@
                 请输入有效的邮件地址
             </td>
             <td class="tablebody1">
-                <input maxLength="50" size="32" maxlength="32" name="email"
-                       style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000"></td>
+                <input maxLength="50" size="32" maxlength="32" name="email" onblur="verifyemail(this.value)"
+                       style="font-family: Tahoma,Verdana,宋体;  font-size: 12px; line-height: 15px; color: #000000">
+                <b id="reg-inform-email"></b>
+            </td>
         </tr>
         <tr>
             <td class="tablebody2" valign="middle" colspan="2" align="center">

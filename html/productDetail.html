@@ -114,7 +114,6 @@
         created: function () {
             $.ajax({
 
-                // TODO 发送书本id请求 /book/{id}
                 url: '/book/' + bookid,
                 type: "GET",
                 success: function (res) {
@@ -124,7 +123,7 @@
                     }
                 },
                 error: function (res) {
-                    alert("请求服务器失败")
+                    $('<div>').appendTo('body').addClass('alert alert-danger').html('服务不可用').show().delay(2000).fadeOut();
                 }
             })
         }, methods: {
@@ -152,13 +151,13 @@
                         dataType: "JSON",
                         success: function (res) {
                             if (res.msg === "OK") {
-                                $("#productDetail-inform").text("添加成功").fadeIn().fadeOut();
+                                $('<div>').appendTo('body').addClass('alert alert-success').html('添加成功').show().delay(1000).fadeOut();
                             } else {
-                                $("#productDetail-inform").text("添加失败").fadeIn().fadeOut();
+                                $('<div>').appendTo('body').addClass('alert alert-danger').html('失败！！').show().delay(1000).fadeOut();
                             }
                         },
                         error: function () {
-                            $("#productDetail-inform").text("添加失败").fadeIn().fadeOut();
+                            $('<div>').appendTo('body').addClass('alert alert-danger').html('服务不可用').show().delay(1000).fadeOut();
                         }
 
                     });

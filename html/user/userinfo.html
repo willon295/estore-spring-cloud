@@ -49,12 +49,12 @@
             <td width="40%" class="tablebody1"><b></b>：<br>
                 注册用户名长度限制为0－16字节
             </td>
-            <td width="60%" class="tablebody1">
+            <td width="60%" class="tablebody1" id="id-name">
 
-                <input maxLength="8" size="32" name="id" :value="customer.id"
+                <input maxLength="8" size="32" name="id" value="id"
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000"
                        hidden/>
-                <input maxLength="8" size="32" name="name" :value="customer.name"
+                <input maxLength="8" size="32" name="name" value=""
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000"
                        disabled/>
                 <font color="#FF0000">*</font>
@@ -70,8 +70,7 @@
                 请不要使用任何类似 \'*\'、\' \' 或 HTML 字符'
             </td>
             <td width="60%" class="tablebody1">
-                <input id="update-password" type="password" maxLength="8" size="32" name="password"
-                       :value="customer.password"
+                <input id="update-password" type="password" maxLength="8" size="32" name="password" value=""
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000"
                        onblur="checkReg()">
                 <font color="#FF0000">*</font>
@@ -96,21 +95,19 @@
             <td class="tablebody1"><b>所在地区</b>：</td>
             <td class="tablebody1">
 
-                <span id="countryVue">
-                    <select v-model="selected" name="country">
-                        <option v-for=" option in options" :value="option.value">{{option.text}}</option>
-                    </select>
-                </span>
+                           <span id="countryVue">
+                               <select v-model="selected" name="country">
+                                   <option v-for=" option in options" :value="option.value">{{option.text}}</option>
+                               </select>
+                           </span>
+                <span id="province">
 
-                <span id="provinceVue">
-                    <select v-model="selected" name="province">
-                        <option v-for="option in options" :value="option.value">
-                            {{option.text}}
-                        </option>
-                    </select>
-                </span>
+                                <select v-model="selected" name="province">
+                                    <option v-for="op in options" :value="op.value">{{op.text}}</option>
+                                </select>
+                            </span>
 
-                <input type="text" size="8" name="city" :value="city"
+                <input type="text" size="8" name="city" value=""
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">市/县
             </td>
         </tr>
@@ -125,15 +122,16 @@
         <tr>
             <td class="tablebody1"><b>邮编</b>：</td>
             <td class="tablebody1">
-                <input id="update-zip" type="text" size="32" maxlength="8" name="zip" :value="customer.zip"
+                <input id="update-zip" type="number" size="32" maxlength="8" name="zip" value=""
+
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">
             </td>
         </tr>
         <tr>
             <td class="tablebody1"><b>手机</b>：</td>
             <td class="tablebody1">
-                <input id="update-telephone" type="text" size="32" maxlength="16" name="telephone"
-                       :value="customer.telephone"
+                <input id="update-telephone" type="number" size="32" maxlength="11" name="telephone"
+                       value=''
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000">
             </td>
         </tr>
@@ -142,7 +140,8 @@
                 请输入有效的邮件地址
             </td>
             <td class="tablebody1">
-                <input id="update-email" maxLength="50" size="32" maxlength="32" name="email" :value="customer.email"
+                <input id="update-email" type="email" maxLength="50" size="32" maxlength="32" name="email"
+                       value=""
                        style="font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000"></td>
         </tr>
         <tr>
@@ -174,117 +173,121 @@
 </table>
 </body>
 <script>
-    if (checkLogin()) {
-        $("#header").load("/header.html");
-        $("#footer").load("/footer.html");
-        var customer = JSON.parse($.cookie('customer'));
-        var addr = customer.address;
-        var arr = addr.toString().split("#");
-        var coun = arr[0];
-        var prov = arr[1];
-        var city = arr[2];
-        var street = arr[3];
-        console.log(customer);
+    $(document).ready(function () {
 
-        //国家信息显示
-        var countryVue = new Vue({
-            el: "#countryVue",
-            data: {
-                selected: coun,
-                options: [
-                    {text: '中国', value: '中国'},
-                    {text: '中国香港', value: '中国香港'},
-                    {text: '中国台湾', value: '中国台湾'},
-                ]
-            }
-        });
-        //省份信息显示
-        var provinceVue = new Vue({
-            el: "#provinceVue",
-            data: {
-                selected: prov,
-                options: [
-                    {text: '安徽', value: '安徽'},
+        if (checkLogin()) {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+            var customer = JSON.parse($.cookie('customer'));
+            var addr = customer.address;
+            var arr = addr.toString().split("#");
+            var coun = arr[0];
+            var prov = arr[1];
+            var city = arr[2];
+            var street = arr[3];
+            console.log(customer);
+            $("#countryVue").val(coun);
+            $("#province").val(prov);
+            $("input[name='name']").val(customer.name);
+            $("input[name='id']").val(customer.id);
+            $("input[name='password']").val(customer.password);
+            $("input[name='password2']").val(customer.password);
+            $("input[name='telephone']").val(customer.telephone);
+            $("input[name='zip']").val(customer.zip);
+            $("input[name='city']").val(city);
+            $("input[name='street']").val(street);
+            $("input[name='email']").val(customer.email);
+            //国家信息显示
+            new Vue({
+                el: "#countryVue",
+                data: {
+                    selected: coun,
+                    options: [
+                        {text: '中国', value: '中国'},
+                        {text: '中国香港', value: '中国香港'},
+                        {text: '中国台湾', value: '中国台湾'},
+                    ]
+                }
+            });
+            //省份信息显示
+            new Vue({
+                el: "#province",
+                data: {
+                    selected: prov,
+                    options: [
+                        {text: '安徽', value: '安徽'},
+                        {text: '北京', value: '北京'},
+                        {text: '重庆', value: '重庆'},
 
-                    {text: '北京', value: '北京'},
+                        {text: '福建', value: '福建'},
 
-                    {text: '重庆', value: '重庆'},
+                        {text: '广东', value: '广东'},
 
-                    {text: '福建', value: '福建'},
+                        {text: '甘肃', value: '甘肃'},
 
-                    {text: '广东', value: '广东'},
+                        {text: '广西', value: '广西'},
 
-                    {text: '甘肃', value: '甘肃'},
+                        {text: '贵州', value: '贵州'},
 
-                    {text: '广西', value: '广西'},
+                        {text: '河南', value: '河南'},
 
-                    {text: '贵州', value: '贵州'},
+                        {text: '湖北', value: '湖北'},
 
-                    {text: '河南', value: '河南'},
+                        {text: '河北', value: '河北'},
 
-                    {text: '湖北', value: '湖北'},
+                        {text: '海南', value: '海南'},
 
-                    {text: '河北', value: '河北'},
+                        {text: '香港', value: '香港'},
 
-                    {text: '海南', value: '海南'},
+                        {text: '黑龙江', value: '黑龙江'},
 
-                    {text: '香港', value: '香港'},
+                        {text: '湖南', value: '湖南'},
 
-                    {text: '黑龙江', value: '黑龙江'},
+                        {text: '吉林', value: '吉林'},
 
-                    {text: '湖南', value: '湖南'},
+                        {text: '江苏', value: '江苏'},
 
-                    {text: '吉林', value: '吉林'},
+                        {text: '江西', value: '江西'},
 
-                    {text: '江苏', value: '江苏'},
+                        {text: '辽宁', value: '辽宁'},
 
-                    {text: '江西', value: '江西'},
+                        {text: '澳门', value: '澳门'},
 
-                    {text: '辽宁', value: '辽宁'},
+                        {text: '内蒙古', value: '内蒙古'},
 
-                    {text: '澳门', value: '澳门'},
+                        {text: '宁夏', value: '宁夏'},
 
-                    {text: '内蒙古', value: '内蒙古'},
+                        {text: '青海', value: '青海'},
 
-                    {text: '宁夏', value: '宁夏'},
+                        {text: '四川', value: '四川'},
 
-                    {text: '青海', value: '青海'},
+                        {text: '山东', value: '山东'},
 
-                    {text: '四川', value: '四川'},
+                        {text: '上海', value: '上海'},
 
-                    {text: '山东', value: '山东'},
+                        {text: '陕西', value: '陕西'},
 
-                    {text: '上海', value: '上海'},
+                        {text: '山西', value: '山西'},
 
-                    {text: '陕西', value: '陕西'},
+                        {text: '天津', value: '天津'},
 
-                    {text: '山西', value: '山西'},
+                        {text: '台湾', value: '台湾'},
 
-                    {text: '天津', value: '天津'},
+                        {text: '新疆', value: '新疆'},
 
-                    {text: '台湾', value: '台湾'},
+                        {text: '西藏', value: '西藏'},
 
-                    {text: '新疆', value: '新疆'},
+                        {text: '云南', value: '云南'},
 
-                    {text: '西藏', value: '西藏'},
+                        {text: '浙江', value: '浙江'},
 
-                    {text: '云南', value: '云南'},
+                        {text: '其它', value: '其它'}
+                    ]
+                }
+            });
 
-                    {text: '浙江', value: '浙江'},
 
-                    {text: '其它', value: '其它'}
-                ]
-            }
-        });
-        new Vue({
-            el: "#modify-table",
-            data: {
-                customer: customer,
-                city: city,
-                street: street
-            }
-        });
-    }
-
+        }
+    });
 </script>
 </html>
