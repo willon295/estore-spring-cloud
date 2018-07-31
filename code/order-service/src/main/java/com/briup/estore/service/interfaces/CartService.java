@@ -1,4 +1,4 @@
-package com.briup.estore.service;
+package com.briup.estore.service.interfaces;
 
 import com.briup.estore.common.dto.ResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;

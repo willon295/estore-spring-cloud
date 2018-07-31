@@ -2,7 +2,7 @@ package com.briup.estore.controller;
 
 import com.briup.estore.common.bean.Cart;
 import com.briup.estore.common.dto.ResponseDTO;
-import com.briup.estore.service.CartService;
+import com.briup.estore.service.interfaces.CartService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
+ * 购物车控制器
+ *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Slf4j
 @RestController
@@ -23,12 +27,12 @@ public class CartController {
     private static final String MSG_OK = "OK";
 
     @Autowired
-    private CartService service;
+    private CartService cartService;
 
     /**
      * 添加新的购物车项
      *
-     * @param cart 购物车
+     * @param cart 购物车项
      * @return 处理结果
      */
     @PostMapping("/cart")
@@ -36,7 +40,7 @@ public class CartController {
 
         ResponseDTO response = new ResponseDTO();
         try {
-            service.saveCart(cart);
+            cartService.saveCart(cart);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
@@ -56,7 +60,7 @@ public class CartController {
 
         ResponseDTO response = new ResponseDTO();
         try {
-            service.deleteCartById(id);
+            cartService.deleteCartById(id);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
@@ -77,7 +81,7 @@ public class CartController {
 
         ResponseDTO response = new ResponseDTO();
         try {
-            service.updateCart(cart);
+            cartService.updateCart(cart);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
@@ -98,7 +102,7 @@ public class CartController {
 
         ResponseDTO response = new ResponseDTO();
         try {
-            service.deleteAllCartsByCustomerId(id);
+            cartService.deleteAllCartsByCustomerId(id);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
             response.setMsg(MSG_FAILED);
@@ -120,7 +124,7 @@ public class CartController {
         ResponseDTO response = new ResponseDTO();
 
         try {
-            PageInfo<Cart> cartPageInfo = service.listCartsByCustomerId(id, page);
+            PageInfo<Cart> cartPageInfo = cartService.listCartsByCustomerId(id, page);
             response.setData(cartPageInfo);
             response.setMsg(MSG_OK);
         } catch (Exception e) {
@@ -140,7 +144,7 @@ public class CartController {
 
         ResponseDTO response = new ResponseDTO();
         try {
-            List<Cart> carts = service.listAllCartsByCustomerId(id);
+            List<Cart> carts = cartService.listAllCartsByCustomerId(id);
             response.setData(carts);
             response.setMsg(MSG_OK);
         } catch (Exception e) {

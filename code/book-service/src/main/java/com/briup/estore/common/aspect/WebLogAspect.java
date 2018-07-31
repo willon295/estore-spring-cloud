@@ -17,9 +17,12 @@ import java.util.Enumeration;
 
 
 /**
- * 全局 Controller 请求日志处理
+ * 全局通用 Controller 日志收集 切面
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Component
 @Aspect

@@ -28,12 +28,12 @@ pagehelper:
 
 #支付宝沙箱配置信息
 alipay:
-  server-url: https://openapi.alipaydev.com/gateway.do
+  server-url: 
   private-key: 
   alipay-public-key:
   format: json
   charset: utf-8
   sign-type: RSA2
-  app-id: 
-  notify-url: http://test.com/order
-  return-url: http://test.com/user/order.html
+  app-id: 2016091900545865
+  notify-url: http://127.0.0.1/order
+  return-url: http://127.0.0.1/user/order.html

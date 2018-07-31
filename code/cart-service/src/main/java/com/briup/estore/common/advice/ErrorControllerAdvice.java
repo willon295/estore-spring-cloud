@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * 全局 Controller 异常以及 ， 404 处理
+ * 全局异常处理类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @ControllerAdvice
 public class ErrorControllerAdvice {
@@ -44,7 +46,7 @@ public class ErrorControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     public Map error(Exception e) {
         map.put("code", "500");
-        map.put("msg", "服务器内部错误：");
+        map.put("msg", "服务器内部错误：" + e.getMessage());
         return map;
     }
 }

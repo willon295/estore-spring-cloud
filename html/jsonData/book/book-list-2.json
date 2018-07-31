@@ -1,0 +1,62 @@
+{
+  "msg": "OK",
+  "data": {
+    "total": 8,
+    "list": [
+      {
+        "id": 6,
+        "name": "Java 2核心技术（第6版） 卷I：基础知识",
+        "price": 75,
+        "author": "叶乃文",
+        "publisher": "机械工业出版社/Prentice Hall PTR",
+        "pageNum": "691",
+        "desc": "本书是java技术经典参考书，多年畅销不衰，第7版在保留以前版本风格的基础上，涵盖java 2开发平台标准版j2se 5．0的基础知识，主要内容包括面向对象程序设计、反射与代理、接口与内部类、事件监听器模型、使用swing ui工具箱进行图形用户界面设计、异常处理、流输入/输出和对象序列化，泛型程序设计等。.\r\n",
+        "img": null,
+        "type": "Java程序设计"
+      },
+      {
+        "id": 7,
+        "name": "Tomcat与Java Web开发技术详解",
+        "price": 45,
+        "author": "孙卫琴",
+        "publisher": "电子工业出版社",
+        "pageNum": "452",
+        "desc": "《Tomcat与Java Web开发技术详解》编辑推荐：Jakarta Tomcat服务器是在SUN公司的JSWDK（JavaServer Web DevelopmentKit，SUN公司推出的小型Servlet/JSP调试工具）的基础上发展起来的一个优秀的Java Web应用容器，它是Apache-Jakarta的一个子项目。Tomcat被JavaWorld杂志的编辑选为2001年度最具创新的Java产品（Most Innovative Java Product），同时它又是SUN公司官方推",
+        "img": null,
+        "type": "程序设计"
+      },
+      {
+        "id": 8,
+        "name": "Java与模式",
+        "price": 88,
+        "author": "阎宏",
+        "publisher": "电子工业出版社",
+        "pageNum": "1024",
+        "desc": "本书是一本讲解设计原则以及最为常见的设计模式的实用教材，目的是为了工作繁忙的Java系统设计师提供一个快速而准确的设计原则和设计模式的辅导。",
+        "img": null,
+        "type": "程序设计"
+      }
+    ],
+    "pageNum": 2,
+    "pageSize": 5,
+    "size": 3,
+    "startRow": 6,
+    "endRow": 8,
+    "pages": 2,
+    "prePage": 1,
+    "nextPage": 0,
+    "isFirstPage": false,
+    "isLastPage": true,
+    "hasPreviousPage": true,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1,
+      2
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 2,
+    "firstPage": 1,
+    "lastPage": 2
+  }
+}

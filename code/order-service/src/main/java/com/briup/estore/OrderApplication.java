@@ -7,9 +7,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * 主程序
+ * 订单服务程序入口类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @EnableEurekaClient
 @EnableFeignClients

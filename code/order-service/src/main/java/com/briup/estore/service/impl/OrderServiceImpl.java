@@ -1,28 +1,22 @@
 package com.briup.estore.service.impl;
 
 import com.alipay.api.AlipayClient;
-import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
-import com.alipay.api.domain.AlipayTradeQueryModel;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
-import com.alipay.api.request.AlipayTradeQueryRequest;
-import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.briup.estore.common.bean.BizContent;
 import com.briup.estore.common.bean.Line;
 import com.briup.estore.common.bean.Order;
 import com.briup.estore.dao.LineDAO;
 import com.briup.estore.dao.OrderDAO;
-import com.briup.estore.service.CartService;
-import com.briup.estore.service.OrderService;
+import com.briup.estore.service.interfaces.CartService;
+import com.briup.estore.service.interfaces.OrderService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +24,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 订单服务具体实现类
+ * 订单服务实现类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Service
 @Slf4j
@@ -62,8 +59,8 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public void saveOrder(Order order) throws Exception {
-
-        order.setOrderDate(new Date());
+        Date date = new Date();
+        order.setOrderDate(date);
         //添加订单
         orderDAO.saveOrderAndReturnOrderWithNewId(order);
         order.setState("NO");
@@ -127,15 +124,15 @@ public class OrderServiceImpl implements OrderService {
     public String getTradePage(long id) throws Exception {
 
         Order orderById = orderDAO.getOrderById(id);
-
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
 
-        request.setBizContent("{\"out_trade_no\":\"" + id + "\","
-                + "\"total_amount\":\"" + orderById.getCost() + "\","
-                + "\"subject\":\"用户" + id + "购书订单\","
-                + "\"body\":\"" + id + "\","
-                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-
+        //设置订单信息
+        BizContent bizContent = new BizContent();
+        bizContent.setOutTradeNo(String.valueOf(id));
+        bizContent.setTotalAmount(String.valueOf(orderById.getCost()));
+        bizContent.setSubject("用户" + id + "购书订单");
+        bizContent.setBody(String.valueOf(id));
+        request.setBizContent(bizContent.toString());
         //此处因为没有 外网通知地址，
         //通过调用返回地址，实现支付后改变订单状态
         request.setReturnUrl(notifyUrl + "/" + id + "?callback=alipay");

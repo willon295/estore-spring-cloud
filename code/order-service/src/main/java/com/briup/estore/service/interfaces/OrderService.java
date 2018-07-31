@@ -1,17 +1,23 @@
-package com.briup.estore.service;
+package com.briup.estore.service.interfaces;
 
 import com.briup.estore.common.bean.Line;
 import com.briup.estore.common.bean.Order;
 import com.github.pagehelper.PageInfo;
 
-import java.io.File;
-
 /**
  * 订单服务接口
+ * 该接口规范了所有与订单相关业务的处理规范，主要提供：
+ * 1. 添加订单，同时增加订单项
+ * 2. 通过id删除订单
+ * 3. 通过客户id查询客户订单信息
+ * 4. 获取订单的支付地址
+ * 5. 支付订单后改变订单状态
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
-
 public interface OrderService {
 
 
@@ -53,16 +59,12 @@ public interface OrderService {
      */
     PageInfo<Line> getLinesByOrderId(long id, int page) throws Exception;
 
-
-    // 点击取付款 ---> 预创建交易生成： 支付二维码  ---> 开启任务 每个 2 秒  查询一次支付结果，超过30 秒表示交易取消
-
-
     /**
      * 根据订单编号， 获取订单内容 ， 创建二维码
      *
      * @param orderId 订单编号
      * @return 二维码图片文件
-     * @throws Exception 订单生成失败
+     * @throws Exception 二维码生成失败
      */
     String getTradeQrCode(long orderId) throws Exception;
 
@@ -77,6 +79,7 @@ public interface OrderService {
 
     /**
      * 获取订单支付页面
+     *
      * @param id 订单id
      * @return 页面的代码
      * @throws Exception 异常

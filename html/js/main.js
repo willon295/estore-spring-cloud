@@ -46,28 +46,26 @@ function checkReg() {
     var temp;
     temp = new String(document.reg.password.value);
     if (document.reg.id.value == "") {
-        document.reg.id.focus();
+
         return false;
     }
     if (document.reg.password.value == "") {
         $("#reg-inform-password").text("请输入密码...").css("color", "red");
-        document.reg.password.focus();
+
         return false;
     } else if (temp.length < 6 || temp.length > 8) {
         $("#reg-inform-password").text("您的密码少于6位或多于8位...").css("color", "red");
-        document.reg.password.focus();
+
         return false;
     } else {
         $("#reg-inform-password").text("OK").css("color", "green");
     }
     if (document.reg.password2.value == "") {
         $("#reg-inform-password2").text("请再次输入密码...").css("color", "red");
-        document.reg.password2.focus();
         return false;
     } else if (document.reg.password.value != document.reg.password2.value) {
         $("#reg-inform-password2").text("两次密码不一致...").css("color", "red");
         document.reg.password2.value = "";
-        document.reg.password2.focus();
         return false;
     } else {
         $("#reg-inform-password2").text("OK").css("color", "green");
@@ -156,7 +154,7 @@ function register() {
         var province = $("#reg_form").find(':input[name="province"]').val();
         var city = $("#reg_form").find(':input[name="city"]').val();
         var street = $("#reg_form").find(':input[name="street"]').val();
-        var address = country + province + city + street;
+        var address = country + "#" + province + "#" + city + "#" + street;
         var zip = $("#reg_form").find(':input[name="zip"]').val();
         var telephone = $("#reg_form").find(':input[name="telephone"]').val();
         var email = $("#reg_form").find(':input[name="email"]').val();
@@ -208,7 +206,7 @@ function updateCustomer() {
         var province = $("#update-form").find(':input[name="province"]').val();
         var city = $("#update-form").find(':input[name="city"]').val();
         var street = $("#update-form").find(':input[name="street"]').val();
-        var address = country + province + city + street;
+        var address = country + "#" + province + "#" + city + "#" + street;
         var zip = $("#update-form").find(':input[name="zip"]').val();
         var telephone = $("#update-form").find(':input[name="telephone"]').val();
         var email = $("#update-form").find(':input[name="email"]').val();
@@ -281,7 +279,12 @@ function login() {
             if (res.msg !== "OK") {
                 $("#login-inform").text("信息有误。。").css("color", "red");
             } else {
-                var customerInfo = JSON.stringify(res.data);
+                //将登录的用户信息保存进 cookie
+                var cus = res.data;
+                cus.password = data.password;
+                var customerInfo = JSON.stringify(cus);
+                console.log("登录后的信息。。。");
+                console.log(cus);
                 $.cookie("customer", customerInfo, {path: "/", expires: 1});
                 $(window).attr("location", "/index.html")
             }
@@ -424,7 +427,7 @@ function add2Cart(bookid) {
         dataType: "JSON",
         success: function (res) {
             if (res.msg === "OK") {
-                $("#index-inform").text("添加成功").fadeIn().fadeOut();
+                $("#index-inform").css("size","50px").text("添加成功").fadeIn().fadeOut();
             } else {
                 $("#index-inform").text("添加失败").fadeIn().fadeOut();
             }

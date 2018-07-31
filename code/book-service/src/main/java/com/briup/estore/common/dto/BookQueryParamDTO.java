@@ -1,10 +1,18 @@
 package com.briup.estore.common.dto;
 
+import lombok.Getter;
+import lombok.ToString;
+
 /**
- * 书本查询的参数
+ * 书本查询条件 参数DTO 类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
+@Getter
+@ToString
 public class BookQueryParamDTO {
 
     /**
@@ -24,18 +32,15 @@ public class BookQueryParamDTO {
     private Double toPrice;
 
 
-    public Double getFromPrice() {
-        return fromPrice;
-    }
-
-    public String getDes() {
-        return des;
-    }
-
     public void setDes(String des) {
         this.des = des;
     }
 
+    /**
+     * 设置最低价，处理异常输入，空输入
+     *
+     * @param price 价格
+     */
     public void setFromPrice(Double price) {
         //如果存在最高价，且此价格大于最高价
         if (toPrice != null && price > toPrice) {
@@ -45,10 +50,6 @@ public class BookQueryParamDTO {
             this.fromPrice = price;
         }
 
-    }
-
-    public Double getToPrice() {
-        return toPrice;
     }
 
     public void setToPrice(Double price) {
@@ -61,12 +62,4 @@ public class BookQueryParamDTO {
     }
 
 
-    @Override
-    public String toString() {
-        return "BookQueryParamDTO{" +
-                "des='" + des + '\'' +
-                ", fromPrice=" + fromPrice +
-                ", toPrice=" + toPrice +
-                '}';
-    }
 }

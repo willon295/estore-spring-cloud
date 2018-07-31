@@ -4,7 +4,7 @@ import com.briup.estore.common.bean.Line;
 import com.briup.estore.common.bean.Order;
 import com.briup.estore.common.dto.ResponseDTO;
 import com.briup.estore.common.enums.PaywayEnum;
-import com.briup.estore.service.OrderService;
+import com.briup.estore.service.interfaces.OrderService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

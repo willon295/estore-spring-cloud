@@ -9,9 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 订单
+ * 订单 实体类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Data
 public class Order implements Serializable {

@@ -20,12 +20,7 @@
         where id = #{id}
     </delete>
 
-    <delete id="deleteCartByCustomerIdAndBookId" parameterType="Cart">
 
-        delete from cart
-        where bookid = #{book.id} and customerid = #{customer.id}
-
-    </delete>
 
     <delete id="deleteAllCartsByCustomerId" parameterType="long">
         delete from cart

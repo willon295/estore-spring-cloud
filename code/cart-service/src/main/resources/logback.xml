@@ -9,7 +9,7 @@
         </filter>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/root/springApps/logs/log-%d{yyyy-MM-dd}.log
+            <fileNamePattern>logs/log-%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -19,9 +19,9 @@
             </pattern>
         </encoder>
     </appender>
-    <logger name="com.log.agent" level="DEBUG" />
-    <logger name="com.log" level="INFO" />
+    <logger name="com.log.agent" level="DEBUG"/>
+    <logger name="com.log" level="INFO"/>
     <root level="INFO">
-        <appender-ref ref="RollingFile" />
+        <appender-ref ref="RollingFile"/>
     </root>
 </configuration>

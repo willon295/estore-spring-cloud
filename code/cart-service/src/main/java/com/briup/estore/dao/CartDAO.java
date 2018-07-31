@@ -5,9 +5,13 @@ import com.briup.estore.common.bean.Cart;
 import java.util.List;
 
 /**
- * 购物车DAO
+ * 购物车数据库访问接口，规范数据访问的方法，主要提供：
+ * 1.
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 public interface CartDAO {
 
@@ -20,13 +24,6 @@ public interface CartDAO {
     void deleteCartById(long id) throws Exception;
 
 
-    /**
-     * 通过客户id， 书本id 删除购物车
-     *
-     * @param cart 封装好的购物车类
-     * @throws Exception 异常
-     */
-    void deleteCartByCustomerIdAndBookId(Cart cart) throws Exception;
 
     /**
      * 根据用户id 删除所有购物车信息

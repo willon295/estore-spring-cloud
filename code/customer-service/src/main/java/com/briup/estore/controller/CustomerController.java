@@ -3,16 +3,19 @@ package com.briup.estore.controller;
 import com.briup.estore.common.bean.Customer;
 import com.briup.estore.common.dto.ResponseDTO;
 import com.briup.estore.common.exception.CustomerException;
-import com.briup.estore.service.CustomerService;
+import com.briup.estore.common.util.Md5Base64Encoder;
+import com.briup.estore.service.interfaces.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 /**
+ * 客户服务控制器
+ *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Slf4j
 @RestController
@@ -45,18 +48,19 @@ public class CustomerController {
         }
 
         try {
-            //注册之前， 再次检查用户是否存在
+            //  再次检查用户是否存在
             Customer byName = customerService.findByName(customer.getName());
             //如果存在，直接返回失败
             if (byName != null) {
                 response.setMsg(MSG_FAILED);
                 return response;
             }
-
             //正常注册流程
+            String encodePassword = Md5Base64Encoder.encode(customer.getPassword());
+            customer.setPassword(encodePassword);
             customerService.register(customer);
             response.setMsg(MSG_OK);
-        } catch (CustomerException e) {
+        } catch (Exception e) {
             response.setMsg(MSG_FAILED);
             return response;
         }
@@ -75,7 +79,10 @@ public class CustomerController {
         ResponseDTO response = new ResponseDTO();
         Customer loginUser;
         try {
-            loginUser = customerService.login(customer.getName(), customer.getPassword());
+            String name = customer.getName();
+            //将密码进行加密
+            String password = Md5Base64Encoder.encode(customer.getPassword());
+            loginUser = customerService.login(name, password);
             //未查询到此用户，直接返回失败
             if (loginUser == null) {
                 response.setMsg(MSG_FAILED);
@@ -83,7 +90,7 @@ public class CustomerController {
             }
             response.setMsg(MSG_OK);
             response.setData(loginUser);
-        } catch (CustomerException e) {
+        } catch (Exception e) {
             response.setMsg(MSG_FAILED);
             return response;
         }
@@ -102,6 +109,7 @@ public class CustomerController {
         ResponseDTO response = new ResponseDTO();
         Customer byId;
         try {
+
             byId = customerService.findById(id);
             //不存在此用户，直接返回失败
             if (byId == null) {
@@ -130,9 +138,14 @@ public class CustomerController {
 
         ResponseDTO response = new ResponseDTO();
         try {
+            //将密码进行加密
+            String password = Md5Base64Encoder.encode(customer.getPassword());
+            customer.setPassword(password);
+            //更新成功
             customerService.updateCustomer(customer);
             response.setMsg(MSG_OK);
-        } catch (CustomerException e) {
+        } catch (Exception e) {
+            //异常返回失败
             response.setMsg(MSG_FAILED);
             return response;
         }

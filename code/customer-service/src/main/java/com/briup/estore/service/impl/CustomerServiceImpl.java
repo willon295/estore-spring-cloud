@@ -4,12 +4,18 @@ import com.briup.estore.common.bean.Customer;
 import com.briup.estore.common.exception.CustomerException;
 
 import com.briup.estore.dao.CustomerDAO;
-import com.briup.estore.service.CustomerService;
+import com.briup.estore.service.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 /**
+ * 客户服务业务层实现类
+ *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Service
 public class CustomerServiceImpl implements CustomerService {

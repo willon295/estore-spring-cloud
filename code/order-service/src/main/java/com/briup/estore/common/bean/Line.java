@@ -5,9 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 订单项
+ * 订单项 实体类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Data
 public class Line implements Serializable {

@@ -1,0 +1,131 @@
+{
+  "msg": "OK",
+  "data": {
+    "total": 9,
+    "list": [
+      {
+        "id": 83,
+        "cost": 498,
+        "orderDate": "2018-07-16T07:34:00.000+0000",
+        "lines": [
+          {
+            "id": 240,
+            "num": 2,
+            "order": null,
+            "book": {
+              "id": 1,
+              "name": "精通Hibernate：Java对象持久化技术详解",
+              "price": 59,
+              "author": null,
+              "publisher": null,
+              "pageNum": null,
+              "desc": null,
+              "img": null,
+              "type": null
+            }
+          },
+          {
+            "id": 241,
+            "num": 4,
+            "order": null,
+            "book": {
+              "id": 5,
+              "name": " JAVA编程思想：第3版",
+              "price": 95,
+              "author": null,
+              "publisher": null,
+              "pageNum": null,
+              "desc": null,
+              "img": null,
+              "type": null
+            }
+          }
+        ],
+        "customer": {
+          "id": 6,
+          "name": "chen",
+          "password": null,
+          "zip": "333333",
+          "address": "中国安徽",
+          "telephone": "188876666",
+          "email": "willon@163.com",
+          "orders": []
+        },
+        "state": "payed",
+        "payway": "HDFK"
+      },
+      {
+        "id": 88,
+        "cost": 324,
+        "orderDate": "2018-07-17T05:18:47.000+0000",
+        "lines": [
+          {
+            "id": 247,
+            "num": 2,
+            "order": null,
+            "book": {
+              "id": 6,
+              "name": "Java 2核心技术（第6版） 卷I：基础知识",
+              "price": 75,
+              "author": null,
+              "publisher": null,
+              "pageNum": null,
+              "desc": null,
+              "img": null,
+              "type": null
+            }
+          },
+          {
+            "id": 248,
+            "num": 2,
+            "order": null,
+            "book": {
+              "id": 7,
+              "name": "Tomcat与Java Web开发技术详解",
+              "price": 45,
+              "author": null,
+              "publisher": null,
+              "pageNum": null,
+              "desc": null,
+              "img": null,
+              "type": null
+            }
+          }
+        ],
+        "customer": {
+          "id": 6,
+          "name": "chen",
+          "password": null,
+          "zip": "333333",
+          "address": "中国安徽",
+          "telephone": "188876666",
+          "email": "willon@163.com",
+          "orders": []
+        },
+        "state": "payed",
+        "payway": "YHZZ"
+      }
+    ],
+    "pageNum": 2,
+    "pageSize": 5,
+    "size": 2,
+    "startRow": 6,
+    "endRow": 7,
+    "pages": 2,
+    "prePage": 1,
+    "nextPage": 0,
+    "isFirstPage": false,
+    "isLastPage": true,
+    "hasPreviousPage": true,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1,
+      2
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 2,
+    "firstPage": 1,
+    "lastPage": 2
+  }
+}

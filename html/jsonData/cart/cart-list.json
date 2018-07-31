@@ -1,0 +1,92 @@
+{
+  "msg": "OK",
+  "data": {
+    "total": 4,
+    "list": [
+      {
+        "id": 13,
+        "num": 2,
+        "book": {
+          "id": 7,
+          "name": "Tomcat与Java Web开发技术详解",
+          "price": 45.0,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": null
+        },
+        "customer": null
+      },
+      {
+        "id": 14,
+        "num": 3,
+        "book": {
+          "id": 6,
+          "name": "Java 2核心技术（第6版） 卷I：基础知识",
+          "price": 75.0,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": null
+        },
+        "customer": null
+      },
+      {
+        "id": 15,
+        "num": 3,
+        "book": {
+          "id": 2,
+          "name": "Effective Java中文版",
+          "price": 39.0,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": null
+        },
+        "customer": null
+      },
+      {
+        "id": 16,
+        "num": 1,
+        "book": {
+          "id": 1,
+          "name": "精通Hibernate：Java对象持久化技术详解",
+          "price": 59.0,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": null
+        },
+        "customer": null
+      }
+    ],
+    "pageNum": 1,
+    "pageSize": 5,
+    "size": 4,
+    "startRow": 1,
+    "endRow": 4,
+    "pages": 1,
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1,
+    "firstPage": 1,
+    "lastPage": 1
+  }
+}

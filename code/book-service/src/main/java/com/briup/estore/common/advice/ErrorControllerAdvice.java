@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * 全局 Controller 异常以及 ， 404 处理
+ * 全局通用异常处理类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @ControllerAdvice
 public class ErrorControllerAdvice {

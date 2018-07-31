@@ -1,0 +1,13 @@
+{
+  "msg": "OK",
+  "data": {
+    "id": 6,
+    "name": "chen",
+    "password": "chenlong",
+    "zip": "333333",
+    "address": "中国安徽",
+    "telephone": "188876666",
+    "email": "willon@163.com",
+    "orders": []
+  }
+}

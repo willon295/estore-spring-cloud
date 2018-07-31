@@ -2,7 +2,7 @@ package com.briup.estore.service.impl;
 
 import com.briup.estore.common.bean.Cart;
 import com.briup.estore.dao.CartDAO;
-import com.briup.estore.service.CartService;
+import com.briup.estore.service.interfaces.CartService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 购物车服务具体实现
+ * 购物车服务实现类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Slf4j
 @Service
@@ -66,6 +69,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public PageInfo<Cart> listCartsByCustomerId(long id, int page) throws Exception {
+        //开启分页
         PageHelper.startPage(page, 5);
         List<Cart> carts = cartDAO.listAllCartsByCustomerId(id);
         return new PageInfo<>(carts);

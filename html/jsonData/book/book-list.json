@@ -1,0 +1,84 @@
+{
+  "msg": "OK",
+  "data": {
+    "total": 8,
+    "list": [
+      {
+        "id": 1,
+        "name": "精通Hibernate：Java对象持久化技术详解",
+        "price": 59,
+        "author": "孙卫琴",
+        "publisher": "电子工业出版社出版",
+        "pageNum": "299",
+        "desc": "本书在第一版基础上，理论内容更新，更加注重理论与实践的结合，有大量具有典型性和实用价值的Hibernate应用实例。全书将详细介绍运用目前最成熟的Hibernate 3.3版本",
+        "img": null,
+        "type": "软件技术"
+      },
+      {
+        "id": 2,
+        "name": "Effective Java中文版",
+        "price": 39,
+        "author": "Joshua Bloch",
+        "publisher": "机械工业出版社出版",
+        "pageNum": "287",
+        "desc": "《Effective Java中文版(第2版)》主要内容：在Java编程中78条极具实用价值的经验规则，这些经验规则涵盖了大多数开发人员每天所面临的问题的解决方案。通过对Java平台设计专家所使用的技术的全面描述，揭示了应该做什么，不应该做什么才能产生清晰、健壮和高效的代码。",
+        "img": null,
+        "type": "机械工程"
+      },
+      {
+        "id": 3,
+        "name": "精通Spring",
+        "price": 39,
+        "author": "罗时飞",
+        "publisher": "电子工业出版社",
+        "pageNum": "521",
+        "desc": "本书是关于Spring 2.5的权威教程，是Java/Java EE开发者必备的参考书。全书共分为5篇：第1篇为综述，主要围绕Java EE 5、Spring展开；第2篇介绍Spring 2.5核心技术，主要围绕Spring元框架进行阐述；第3篇介绍DAO层集成技术，主要围绕JDBC、Hibernate和JPA等持久化技术展开论述，针对Spring使能应用的事务管理和集成测试，也进行了相关介绍",
+        "img": null,
+        "type": "程序设计"
+      },
+      {
+        "id": 4,
+        "name": "深入浅出Hibernate",
+        "price": 59,
+        "author": "夏昕",
+        "publisher": "电子工业出版社",
+        "pageNum": "453",
+        "desc": "本书由互联网上影响广泛的开放文档OpenDoc系列自由文献首份文档“Hibernate开发指南”发展而来。在编写过程中，进行了重新构思与组织，同时对内容的深度与广度进行了重点强化。本书从持久层入手，引出对象/关系数据库映射的由来，接下来聚焦于目前最完善、最强悍的ORM产品—— Hibernate。",
+        "img": null,
+        "type": "程序设计"
+      },
+      {
+        "id": 5,
+        "name": " JAVA编程思想：第3版",
+        "price": 95,
+        "author": "陈昊鹏、饶若",
+        "publisher": "机械工业出版社",
+        "pageNum": "233",
+        "desc": "2003年《Software Development》杂志Jolt大奖、2001年《Java World》杂志编辑推荐图书奖、1999年《Java World》杂志读者选择最佳图书奖、1998年《Software Development》杂志Jolt大奖、1998年《Java Developer’s Journal》杂志编辑推荐最佳图书奖。",
+        "img": null,
+        "type": "编程思想"
+      }
+    ],
+    "pageNum": 1,
+    "pageSize": 5,
+    "size": 5,
+    "startRow": 1,
+    "endRow": 5,
+    "pages": 2,
+    "prePage": 0,
+    "nextPage": 2,
+    "isFirstPage": true,
+    "isLastPage": false,
+    "hasPreviousPage": false,
+    "hasNextPage": true,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1,
+      2
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 2,
+    "firstPage": 1,
+    "lastPage": 2
+  }
+}

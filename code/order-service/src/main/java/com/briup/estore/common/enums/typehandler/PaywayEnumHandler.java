@@ -10,9 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 枚举类型处理器
+ *  支付方式枚举类型处理器
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 public class PaywayEnumHandler extends BaseTypeHandler<PaywayEnum> {
 

@@ -9,9 +9,12 @@ import java.util.Set;
 
 
 /**
- * 顾客类
+ * 顾客实体类
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 @Data
 @NoArgsConstructor

@@ -1,0 +1,76 @@
+{
+  "msg": "OK",
+  "data": {
+    "total": 2,
+    "list": [
+      {
+        "id": 240,
+        "num": 2,
+        "order": {
+          "id": 83,
+          "cost": 498,
+          "orderDate": null,
+          "lines": [],
+          "customer": null,
+          "state": "payed",
+          "payway": "YHZZ"
+        },
+        "book": {
+          "id": 1,
+          "name": "精通Hibernate：Java对象持久化技术详解",
+          "price": 59,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": null
+        }
+      },
+      {
+        "id": 241,
+        "num": 4,
+        "order": {
+          "id": 83,
+          "cost": 498,
+          "orderDate": null,
+          "lines": [],
+          "customer": null,
+          "state": "payed",
+          "payway": "YHZZ"
+        },
+        "book": {
+          "id": 5,
+          "name": " JAVA编程思想：第3版",
+          "price": 95,
+          "author": null,
+          "publisher": null,
+          "pageNum": null,
+          "desc": null,
+          "img": null,
+          "type": "YHZZ"
+        }
+      }
+    ],
+    "pageNum": 1,
+    "pageSize": 5,
+    "size": 2,
+    "startRow": 1,
+    "endRow": 2,
+    "pages": 1,
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1,
+    "firstPage": 1,
+    "lastPage": 1
+  }
+}

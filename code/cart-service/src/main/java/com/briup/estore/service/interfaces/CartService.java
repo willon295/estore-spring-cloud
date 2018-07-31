@@ -1,4 +1,4 @@
-package com.briup.estore.service;
+package com.briup.estore.service.interfaces;
 
 import com.briup.estore.common.bean.Cart;
 import com.github.pagehelper.PageInfo;
@@ -6,9 +6,12 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
- * 购物车Service
+ * 购物车服务接口
  *
  * @author willon
+ * @version 1.0
+ * @since 18-7-30
+ * 联系方式： willon295@163.com
  */
 public interface CartService {
 
@@ -66,9 +69,10 @@ public interface CartService {
 
     /**
      * 根据用户 id 查询出所有购物车信息
+     *
      * @param id 用户id
-     * @throws  Exception 异常
      * @return 购物车信息
+     * @throws Exception 异常
      */
     List<Cart> listAllCartsByCustomerId(long id) throws Exception;
 }
