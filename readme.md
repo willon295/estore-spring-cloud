@@ -1,9 +1,9 @@
 # 简介
 
-1. 采用微服务架构设计
-2. 粗粒度，按服务对象划分： 客户服务、书本服务、购物车服务、订单服务
-3. 使用 nginx 存放静态文件
-4. 使用 nginx 代理服务，根据请求的不同进行请求转发
+1. 采用 `微服务` 架构设计，符合 `Restful`  风格
+2. 粗粒度，按服务对象划分： `客户服务` 、`书本服务` 、`购物车服务` 、`订单服务` ，所有服务独立运行
+3.  nginx 存放静态 `html` 文件
+4.  nginx 反向代理，根据请求路径不同，将请求细分，进行转发
 5. 数据库独立
 6. 总体架构： **Reg 为注册中心**  
 
@@ -382,19 +382,7 @@ server{
    - 站点配置/ 请求转发
 
      ```nginx
-     upstream node1{
-         server 127.0.0.1:9001;
-     }
-     upstream node2{
-         server 127.0.0.1:9002;
-     }
-     upstream node3{
-         server 127.0.0.1:9003;
-     }
      
-     upstream node4{
-         server 127.0.0.1:9004;
-     }
      server{
              listen 80; 
              server_name test.com;
@@ -405,17 +393,18 @@ server{
          }   
      
      
+         #将 /book 路径下所有请求转发 给 127.0.0.1:9001 的书本服务
          location  /book {
-             proxy_pass http://node1/book;
+             proxy_pass http://127.0.0.1:9001/book;
          }   
          location  /cart {
-             proxy_pass http://node2/cart;
+             proxy_pass http://127.0.0.1:9002/cart;
          }   
          location  /customer {
-             proxy_pass http://node3/customer;
+             proxy_pass http://127.0.0.1:9003/customer;
          }   
          location  /order {
-             proxy_pass http://node4/order;
+             proxy_pass http://127.0.0.1:9004/order;
          }   
      }
      
@@ -429,9 +418,9 @@ server{
 
 1. 每一个模块的 `application.yml` 
 
-   ```
+   ```yaml
      datasource:
-       url: jdbc:mysql://localhost:3306/estore?useSSL=false&useUnicode=true&characterEncoding=utf-8
+       url: jdbc:mysql://具体数据库地址:3306/estore?useSSL=false&useUnicode=true&characterEncoding=utf-8
        driver-class-name: com.mysql.jdbc.Driver
        username: root
        password: root
