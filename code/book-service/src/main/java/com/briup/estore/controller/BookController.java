@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 书本相关 请求 处理类
+ * 书本相关请求 处理类
  *
  * @author willon
  * @version 1.0
@@ -34,9 +34,10 @@ public class BookController {
     private BookService bookService;
 
     /**
-     * 查询当前页 所有书本信息
+     * 查询书本列表
      *
-     * @return 当前页所有 书本信息
+     * @param currentPage 当前页
+     * @return 带有分页信息的书本列表
      */
     @GetMapping(value = "/book", params = "pageSize=5")
     public ResponseDTO listBooks(@RequestParam("page") int currentPage) {

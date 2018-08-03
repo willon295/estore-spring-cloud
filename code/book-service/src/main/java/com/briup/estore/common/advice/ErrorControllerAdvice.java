@@ -30,6 +30,7 @@ public class ErrorControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = NotFoundException.class)
     public Map notFound(NotFoundException e) {
+        // TODO springmvc直接抛出异常为何不走这个方法？
         map.put("code", "404");
         map.put("msg", "页面失踪了: ");
         return map;

@@ -4,6 +4,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.briup.estore.common.bean.BizContent;
 import com.briup.estore.common.bean.Line;
@@ -85,9 +86,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public PageInfo<Order> listOrdersByCustomerId(long id, int page) throws Exception {
 
+
         //默认展示5 条数据
         PageHelper.startPage(page, 5);
+        //由于没有   接受 支付宝异步 通知的服务， 可以采取 遍历用户订单信息，向阿里主动发起查询
         List<Order> orders = orderDAO.listOrdersByCustomerId(id);
+        //把此处主动遍历查询删除
         return new PageInfo<>(orders);
     }
 
@@ -134,11 +138,10 @@ public class OrderServiceImpl implements OrderService {
         bizContent.setBody(String.valueOf(id));
         request.setBizContent(bizContent.toString());
         //此处因为没有 外网通知地址，
-        //通过调用返回地址，实现支付后改变订单状态
+        // TODO 通过调用 return 地址，实现支付后改变订单状态,如果线上，将此处改成异步通知接收地址
         request.setReturnUrl(notifyUrl + "/" + id + "?callback=alipay");
-        return alipayClient.pageExecute(request).getBody();
-
-
+        AlipayTradePagePayResponse response = alipayClient.pageExecute(request);
+        return response.getBody();
     }
 
 

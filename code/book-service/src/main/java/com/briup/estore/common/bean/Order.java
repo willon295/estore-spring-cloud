@@ -45,9 +45,9 @@ public class Order implements Serializable {
     private Customer customer;
 
     /**
-     * 订单状态，默认是 payed
+     * 订单状态，默认是 pending
      */
-    private String state = "payed";
+    private String state = "pending";
 
     /**
      * 支付方式

@@ -35,5 +35,7 @@ alipay:
   charset: utf-8
   sign-type: RSA2
   app-id: 2016091900545865
+  #异步通知地址
   notify-url: http://127.0.0.1/order
+  #返回地址
   return-url: http://127.0.0.1/user/order.html

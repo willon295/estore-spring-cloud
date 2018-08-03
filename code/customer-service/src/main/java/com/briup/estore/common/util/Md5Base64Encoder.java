@@ -24,9 +24,27 @@ public class Md5Base64Encoder {
      */
     public static String encode(String origin) throws NoSuchAlgorithmException {
 
+        //混淆
+        String base = "$*934AF8d$^7dffD";
+        origin += base;
         BASE64Encoder base64Encoder = new BASE64Encoder();
         MessageDigest md5 = MessageDigest.getInstance("MD5");
-        String encode = base64Encoder.encode(md5.digest(origin.getBytes()));
-        return encode.replaceAll("[=]", "").replaceAll("/", "");
+        md5.update(origin.getBytes());
+        byte[] b = md5.digest();
+        StringBuilder sb = new StringBuilder();
+        int i;
+        for (int offset = 0; offset < b.length; offset++) {
+            i = b[offset];
+            if (i < 0) {
+                i += 256;
+            }
+            if (i < 16) {
+                sb.append("0");
+            }
+            sb.append(Integer.toHexString(i));
+        }
+        return base64Encoder.encode(sb.toString().getBytes());
     }
+
+
 }
