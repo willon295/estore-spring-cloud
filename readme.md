@@ -9,6 +9,14 @@
 
    ![structure]( /images/structure.png)
 
+# 规范
+
+1. 遵循 [阿里巴巴代码编写规范](https://github.com/alibaba/p3c) 
+2. JDK1.8 +  SpringBoot 2.0.3 + SpringCloud Finchley.RELEASE + MariadDB 10.3 + Nginx1.14 + Undertow 2.0.1
+3. `Controller`  统一返回 `ResponseDTO` 类型的 JSON 数据（void 除外）
+4. 使用 AOP 处理全局异常
+5. 使用 AOP 记录用户请求日志
+6. 使用 Nginx 解决跨域问题，后端不做跨域处理，前端不做JSONP处理 
 
 # 实现功能
 
